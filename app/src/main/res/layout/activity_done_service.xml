@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context=".DoneServiceActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:padding="8dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:padding="8dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="35dp"
+                app:cardElevation="0dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp">
+
+                <ImageView
+                    android:id="@+id/img_user_avatar"
+                    android:src="@drawable/ic_account_circle_black_24dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp">
+
+                <TextView
+                    android:id="@+id/tv_customer_name"
+                    android:text="Customer name"
+                    android:textColor="@color/colorPrimary"
+                   android:fontFamily="@font/gilroy_medium"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_customer_phone"
+                    android:text="Customer phone"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:text="Services"
+            android:textSize="20sp"
+            android:fontFamily="@font/gilroy_semibold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_services"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+   <LinearLayout
+       android:orientation="horizontal"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:weightSum="10">
+
+       <TextView
+           android:text="Extra items"
+           android:textSize="20sp"
+           android:fontFamily="@font/gilroy_semibold"
+           android:layout_weight="9"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"/>
+
+       <ImageView
+           android:layout_gravity="center_vertical"
+           android:id="@+id/add_shopping"
+           android:src="@drawable/ic_add_black_24dp"
+           app:tint="@color/colorAccent"
+           android:layout_weight="1"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"/>
+
+   </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10">
+
+            <TextView
+                android:text="Customer's picture"
+                android:textSize="20sp"
+                android:fontFamily="@font/gilroy_semibold"
+                android:layout_weight="8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_gravity="center_vertical"
+                android:id="@+id/switch_picture"
+                app:tint="@color/colorAccent"
+                android:checked="false"
+                android:layout_weight="2"
+                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:padding="8dp"
+                android:layout_gravity="center_horizontal"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                android:id="@+id/card_picture"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:visibility="visible"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:id="@+id/img_add_customer_hair"
+                        android:src="@drawable/ic_baseline_add_a_photo_24"
+                        android:scaleType="centerCrop"
+                        app:tint="@color/colorAccent"
+                        android:layout_margin="50dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"/>
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/img_customer_hair"
+                        android:scaleType="centerCrop"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"/>
+
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_marginTop="8dp"
+        android:id="@+id/btn_finish"
+        android:text="Finish"
+        android:enabled="true"
+        android:background="@drawable/rounded_button"
+        app:cornerRadius="12dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="54dp" />
+
+    </LinearLayout>
+</ScrollView>

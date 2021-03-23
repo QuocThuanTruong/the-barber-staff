@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".Fragment.ShoppingFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="8dp"
+            android:text="Add item to check out"
+            android:fontFamily="@font/gilroy_semibold"
+            android:textSize="24sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_gravity="center_horizontal"
+        android:fillViewport="true"
+        android:measureAllChildren="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="8dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_wax"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wax"
+                android:textColor="@android:color/white"
+                app:chipBackgroundColor="@color/colorPrimary" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_spray"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spray"
+                android:textColor="@color/colorPrimary"
+                app:chipBackgroundColor="@color/colorBackground" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_hair_care"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hair Care"
+                android:textColor="@color/colorPrimary"
+                app:chipBackgroundColor="@color/colorBackground" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_body_care"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Body Care"
+                android:textColor="@color/colorPrimary"
+                app:chipBackgroundColor="@color/colorBackground" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Color"
+                android:textColor="@color/colorPrimary"
+                app:chipBackgroundColor="@color/colorBackground" />
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>
