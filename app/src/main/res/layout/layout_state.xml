@@ -4,6 +4,7 @@
     android:id="@+id/card_state"
     app:cardCornerRadius="12dp"
     android:layout_width="match_parent"
+    app:cardElevation="0dp"
     android:layout_height="wrap_content">
 
     <LinearLayout

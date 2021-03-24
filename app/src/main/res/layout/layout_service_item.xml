@@ -5,6 +5,7 @@
     android:layout_width="130dp"
     android:layout_height="200dp"
     android:orientation="vertical"
+    app:cardElevation="0dp"
     app:cardCornerRadius="20dp">
 
     <LinearLayout
