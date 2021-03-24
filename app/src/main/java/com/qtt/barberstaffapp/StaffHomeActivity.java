@@ -355,7 +355,10 @@ public class StaffHomeActivity extends AppCompatActivity implements ITimeSlotLoa
     @Override
     public void onNotificationCountSuccess(int count) {
         if (count != 0) {
-            tvNotificationBadge.setVisibility(View.VISIBLE);
+            if (tvNotificationBadge != null) {
+                tvNotificationBadge.setVisibility(View.VISIBLE);
+            }
+
             if (count <= 9)
                 tvNotificationBadge.setText(String.valueOf(count));
             else

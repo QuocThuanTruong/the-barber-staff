@@ -36,11 +36,13 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -61,9 +63,11 @@ import com.qtt.barberstaffapp.Model.FCMSendData;
 import com.qtt.barberstaffapp.Model.LookBook;
 import com.qtt.barberstaffapp.Model.MyToken;
 import com.qtt.barberstaffapp.Model.ShoppingItem;
+import com.qtt.barberstaffapp.Model.User;
 import com.qtt.barberstaffapp.Retrofit.IFCMService;
 import com.qtt.barberstaffapp.Retrofit.RetrofitClient;
 import com.qtt.barberstaffapp.databinding.ActivityDoneServiceBinding;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -287,6 +291,23 @@ public class DoneServiceActivity extends AppCompatActivity implements IBarberSer
     private void setCustomerInformation() {
         binding.tvCustomerName.setText(Common.currentBookingInfo.getCustomerName());
         binding.tvCustomerPhone.setText(Common.currentBookingInfo.getCustomerPhone());
+
+        FirebaseFirestore.getInstance()
+                .collection("User")
+                .whereEqualTo("phoneNumber", Common.currentBookingInfo.getCustomerPhone())
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        User user = null;
+                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                            user = documentSnapshot.toObject(User.class);
+                        }
+
+                        if (user != null && !user.getAvatar().isEmpty()) {
+                            Picasso.get().load(user.getAvatar()).error(R.drawable.user_avatar).into(binding.imgUserAvatar);
+                        }
+                    }
+                });
         //avatar
     }
 

@@ -35,7 +35,7 @@
 
                 <ImageView
                     android:id="@+id/img_user_avatar"
-                    android:src="@drawable/ic_account_circle_black_24dp"
+                    android:src="@drawable/user_avatar"
                     android:layout_width="60dp"
                     android:layout_height="60dp"/>
 

@@ -16,8 +16,8 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:fontFamily="@font/bellerose"
+            android:background="@color/colorAccent"
+            android:fontFamily="@font/gilroy_semibold"
             android:gravity="center"
             android:padding="10dp"
             android:text="STAFF LOGIN"
@@ -25,6 +25,10 @@
             android:textColor="@android:color/white" />
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="14dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -32,15 +36,17 @@
                 android:id="@+id/edt_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/bellerose"
                 android:hint="Staff user" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true">
 
@@ -48,42 +54,46 @@
                 android:id="@+id/edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/bellerose"
                 android:inputType="textPassword"
                 android:hint="Staff password" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
+            android:layout_marginTop="12dp"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:weightSum="4"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:id="@+id/btn_cancel"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
                 android:background="@color/colorPrimaryDark"
-                android:fontFamily="@font/bellerose"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimary"
+                android:text="cancel"
                 android:layout_weight="2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/colorPrimary"
+                app:cornerRadius="14dp"
+                android:layout_height="56dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
+                android:text="login"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/colorPrimaryDark"
-                android:fontFamily="@font/bellerose"
                 android:textColor="@android:color/white"
                 android:layout_weight="2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                app:cornerRadius="14dp"
+                android:layout_height="56dp" />
 
         </LinearLayout>
 

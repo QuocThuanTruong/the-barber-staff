@@ -51,6 +51,7 @@ import com.qtt.barberstaffapp.Model.Invoice;
 import com.qtt.barberstaffapp.Model.LookBook;
 import com.qtt.barberstaffapp.Model.MyNotification;
 import com.qtt.barberstaffapp.Model.MyToken;
+import com.qtt.barberstaffapp.Model.User;
 import com.qtt.barberstaffapp.R;
 import com.qtt.barberstaffapp.Retrofit.IFCMService;
 import com.qtt.barberstaffapp.Retrofit.RetrofitClient;
@@ -236,6 +237,10 @@ public class TotalPriceFragment extends BottomSheetDialogFragment {
 
                                                             })
                                                             .addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
+
+
+                                                    updateUserMoney();
+
                                                 }
 
                                             }
@@ -247,6 +252,29 @@ public class TotalPriceFragment extends BottomSheetDialogFragment {
                         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         });
+    }
+
+    private void updateUserMoney() {
+        ///User/+84389294631
+        DocumentReference userDoc = FirebaseFirestore.getInstance()
+                .collection("User")
+                .document(Common.currentBookingInfo.getCustomerPhone());
+
+        userDoc.get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    User user = documentSnapshot.toObject(User.class);
+
+                    if (user != null) {
+                        userDoc.update("money", calculatePrice() + user.getMoney())
+                                .addOnCompleteListener(avoid -> {
+                                    Log.d("Update_money", "updateUserMoney: " + calculatePrice() + user.getMoney());
+                                }).addOnFailureListener(e -> Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show());
+                    }
+
+
+                }).addOnFailureListener(e -> Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show());
+
+
     }
 
     private void createInvoice() {
