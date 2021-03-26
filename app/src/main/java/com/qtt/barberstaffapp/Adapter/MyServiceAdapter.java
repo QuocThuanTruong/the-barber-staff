@@ -81,7 +81,7 @@ public class MyServiceAdapter extends RecyclerView.Adapter<MyServiceAdapter.MyVi
 
         for (String service: selectedServicesList) {
             if (servicesList.get(position).getUid().equals(service)) {
-                cardViewList.get(position).setCardBackgroundColor(context.getResources().getColor(android.R.color.holo_orange_dark));
+                cardViewList.get(position).setCardBackgroundColor(context.getResources().getColor(R.color.colorCardSelected));
             }
         }
 
