@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -192,48 +193,37 @@ public class StaffHomeActivity extends AppCompatActivity implements ITimeSlotLoa
 
         //Check info of barber
         barberDoc.get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot barberSnapShot = task.getResult();
-                            if (barberSnapShot.exists()) {
-                                CollectionReference dateRef = FirebaseFirestore.getInstance()
-                                        .collection("AllSalon")
-                                        .document(Common.stateName)
-                                        .collection("Branch")
-                                        .document(Common.selectedSalon.getId())
-                                        .collection("Barbers")
-                                        .document(Common.currentBarber.getBarberId())
-                                        .collection(date);
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot barberSnapShot = task.getResult();
+                        if (barberSnapShot.exists()) {
+                            CollectionReference dateRef = FirebaseFirestore.getInstance()
+                                    .collection("AllSalon")
+                                    .document(Common.stateName)
+                                    .collection("Branch")
+                                    .document(Common.selectedSalon.getId())
+                                    .collection("Barbers")
+                                    .document(Common.currentBarber.getBarberId())
+                                    .collection(date);
 
-                                dateRef.get()
-                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    QuerySnapshot querySnapshot = task.getResult();
+                            dateRef.get()
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            QuerySnapshot querySnapshot = task1.getResult();
 
-                                                    if (querySnapshot.isEmpty()) {
-                                                        iTimeSlotLoadListener.onTimeSlotLoadEmpty(); //load default time slot list
-                                                    } else {
-                                                        List<BookingInformation> timeSlotList = new ArrayList<>();
-                                                        for (QueryDocumentSnapshot timeSlotSnapShot : querySnapshot) {
-                                                            BookingInformation slot = timeSlotSnapShot.toObject(BookingInformation.class);
-                                                            timeSlotList.add(slot);
-                                                        }
-
-                                                        iTimeSlotLoadListener.onTimeSlotLoadSuccess(timeSlotList);
-                                                    }
+                                            if (querySnapshot.isEmpty()) {
+                                                iTimeSlotLoadListener.onTimeSlotLoadEmpty(); //load default time slot list
+                                            } else {
+                                                List<BookingInformation> timeSlotList = new ArrayList<>();
+                                                for (QueryDocumentSnapshot timeSlotSnapShot : querySnapshot) {
+                                                    BookingInformation slot = timeSlotSnapShot.toObject(BookingInformation.class);
+                                                    timeSlotList.add(slot);
                                                 }
+
+                                                iTimeSlotLoadListener.onTimeSlotLoadSuccess(timeSlotList);
                                             }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        iTimeSlotLoadListener.onTimeSlotLoadFailed(e.getMessage());
-                                    }
-                                });
-                            }
+                                        }
+                                    }).addOnFailureListener(e -> iTimeSlotLoadListener.onTimeSlotLoadFailed(e.getMessage()));
                         }
                     }
                 });
@@ -259,14 +249,17 @@ public class StaffHomeActivity extends AppCompatActivity implements ITimeSlotLoa
         final Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 0);
 
+        Log.d("Realtime_update", "initBookingRealTimeUpdate: " + Common.simpleDateFormat.format(Common.bookingDate.getTime()));
+
         if (Common.bookingDate != null) {
             bookingEvent = (queryDocumentSnapshots, e) -> loadAvailableTimeSlotOfBarber(Common.currentBarber.getBarberId(), Common.simpleDateFormat.format(Common.bookingDate.getTime()));
+            currentBookDateCol = barberDoc.collection(Common.simpleDateFormat.format(Common.bookingDate.getTime()));
+
         } else {
             bookingEvent = (queryDocumentSnapshots, e) -> loadAvailableTimeSlotOfBarber(Common.currentBarber.getBarberId(), Common.simpleDateFormat.format(calendar.getTime()));
+            currentBookDateCol = barberDoc.collection(Common.simpleDateFormat.format(calendar.getTime()));
+
         }
-
-
-        currentBookDateCol = barberDoc.collection(Common.simpleDateFormat.format(calendar.getTime()));
 
         bookingRealTimeListener = currentBookDateCol.addSnapshotListener(bookingEvent);
     }
