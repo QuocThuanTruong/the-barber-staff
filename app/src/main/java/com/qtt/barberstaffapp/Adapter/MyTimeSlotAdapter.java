@@ -2,6 +2,7 @@ package com.qtt.barberstaffapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,6 +101,7 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.Ti
                                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                Log.d("CCCC", "onComplete: " + task.getResult());
                                                 if (task.isSuccessful()) {
                                                     if (task.getResult().exists()) {
                                                         Common.currentBookingInfo = task.getResult().toObject(BookingInformation.class);

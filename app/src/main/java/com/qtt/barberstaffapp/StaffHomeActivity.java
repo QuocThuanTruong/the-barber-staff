@@ -259,12 +259,12 @@ public class StaffHomeActivity extends AppCompatActivity implements ITimeSlotLoa
         final Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 0);
 
-        bookingEvent = new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                loadAvailableTimeSlotOfBarber(Common.currentBarber.getBarberId(), Common.simpleDateFormat.format(calendar.getTime()));
-            }
-        };
+        if (Common.bookingDate != null) {
+            bookingEvent = (queryDocumentSnapshots, e) -> loadAvailableTimeSlotOfBarber(Common.currentBarber.getBarberId(), Common.simpleDateFormat.format(Common.bookingDate.getTime()));
+        } else {
+            bookingEvent = (queryDocumentSnapshots, e) -> loadAvailableTimeSlotOfBarber(Common.currentBarber.getBarberId(), Common.simpleDateFormat.format(calendar.getTime()));
+        }
+
 
         currentBookDateCol = barberDoc.collection(Common.simpleDateFormat.format(calendar.getTime()));
 
