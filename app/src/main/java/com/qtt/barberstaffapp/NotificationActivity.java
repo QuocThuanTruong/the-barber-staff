@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -54,6 +55,10 @@ public class NotificationActivity extends AppCompatActivity implements INotifica
         super.onCreate(savedInstanceState);
         binding = ActivityNotificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
+        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Notification");

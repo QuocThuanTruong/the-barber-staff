@@ -115,6 +115,10 @@ public class DoneServiceActivity extends AppCompatActivity implements IBarberSer
         binding = ActivityDoneServiceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
+        }
+
         setCustomerInformation();
 
         init();

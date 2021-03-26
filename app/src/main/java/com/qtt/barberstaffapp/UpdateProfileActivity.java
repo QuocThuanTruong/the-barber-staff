@@ -48,6 +48,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityUpdateProfileBinding.inflate(getLayoutInflater());
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Profile");
 
