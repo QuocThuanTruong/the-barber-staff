@@ -75,6 +75,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         binding.edtUserAddress.setText(Common.currentBarber.getAddress());
         binding.edtUserPhone.setText(Common.currentBarber.getPhone());
 
+
         if (!Common.currentBarber.getAvatar().isEmpty()) {
             Picasso.get().load(Common.currentBarber.getAvatar()).error(R.drawable.user_avatar).into(binding.imgUserAvatar);
         }
@@ -122,7 +123,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         }).addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show());
             }
 
-            if (fileUri == null || Common.currentBarber.getAvatar().isEmpty()) {
+            if (fileUri != null || Common.currentBarber.getAvatar().isEmpty()) {
                 upLoadPicture(fileUri);
             }
 
@@ -136,9 +137,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             binding.edtUserAddress.setText(Common.currentBarber.getAddress());
             binding.edtUserPhone.setText(Common.currentBarber.getPhone());
 
-            if (!Common.currentBarber.getAvatar().isEmpty()) {
-                Picasso.get().load(Common.currentBarber.getAvatar()).error(R.drawable.user_avatar).into(binding.imgUserAvatar);
-            }
+
         });
     }
 
@@ -164,7 +163,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 if (task12.isSuccessful()) {
                     String url = task12.getResult().toString().substring(0, task12.getResult().toString().indexOf("&token"));
                     Log.d("AAAAA", "download: " + url);
-                    dialog.dismiss();
+
 
                     ///AllSalon/Florida/Branch/0n7ikrtgQXW4EXhuJ0qy/Barbers/UyQvnFQSQ45PJ26FuT8L
                     FirebaseFirestore.getInstance().collection("AllSalon")
@@ -177,6 +176,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
                             .addOnCompleteListener(task13 -> {
                                 Log.d("Update_profile", "upLoadPicture: successfully");
                                 Common.currentBarber.setAvatar(url);
+                                Picasso.get().load(Common.currentBarber.getAvatar()).error(R.drawable.user_avatar).into(binding.imgUserAvatar);
+                                dialog.dismiss();
                             }).addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show());
                 }
             }).addOnFailureListener(e -> {

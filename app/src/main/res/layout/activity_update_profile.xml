@@ -53,7 +53,7 @@
 
                         <ImageView
                             android:id="@+id/img_user_avatar"
-                            android:scaleType="fitXY"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/user_avatar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
@@ -129,13 +129,14 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_update"
                         android:layout_margin="20dp"
-                        android:background="@drawable/rounded_button"
+                        android:background="@color/colorPrimary"
                         android:text="update"
+                        app:cornerRadius="12dp"
                         android:layout_width="350dp"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="60dp"/>
                 </LinearLayout>
 
 
