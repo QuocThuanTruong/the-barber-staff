@@ -91,6 +91,9 @@ Showing all staff's information, they can update their information by adjusting 
 
 <br/>
 
+# Reference
+Barber booking application of EDMT Dev.
+
 
 # License
 
